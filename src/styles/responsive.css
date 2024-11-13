@@ -1,0 +1,29 @@
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .content {
+    padding: 16px !important;
+  }
+
+  .n-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .featured-carousel {
+    height: 300px !important;
+  }
+
+  .contact-container .n-grid-item {
+    width: 100% !important;
+  }
+}
+
+/* 平板适配 */
+@media (max-width: 1024px) {
+  .n-grid[cols="3"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+} 
