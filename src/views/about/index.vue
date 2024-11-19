@@ -9,7 +9,7 @@
               <n-avatar
                 round
                 :size="160"
-                src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                src="./../../../imgs/touxiang.jpg"
                 class="intro-avatar"
               />
               <div class="avatar-ring"></div>

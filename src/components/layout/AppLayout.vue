@@ -18,7 +18,7 @@
           <n-avatar
             round
             size="large"
-            src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+            src="./../../../imgs/touxiang.jpg"
             :class="{ 'avatar-spin': isLogoHovered }"
             @mouseenter="isLogoHovered = true"
             @mouseleave="isLogoHovered = false"
@@ -92,7 +92,7 @@
                 <n-avatar
                   round
                   size="small"
-                  src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                  src="./../../../imgs/touxiang.jpg"
                 />
               </n-space>
             </div>

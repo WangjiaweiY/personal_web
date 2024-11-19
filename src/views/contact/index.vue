@@ -8,7 +8,7 @@
             <n-avatar
               round
               :size="120"
-              src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+              src="./../../../imgs/touxiang.jpg"
               class="contact-avatar"
             />
             <div class="contact-info">
