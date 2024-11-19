@@ -71,6 +71,11 @@
                   round
                   style="width: 200px"
                   @keydown.enter="handleSearch"
+                  :theme-overrides="{
+                    borderHover: '#1890ff',
+                    borderFocus: '#1890ff',
+                    boxShadowFocus: '0 0 0 2px rgba(24, 144, 255, 0.2)'
+                  }"
                 >
                   <template #prefix>
                     <n-icon :component="SearchOutlined" />
@@ -909,7 +914,7 @@ watch(searchText, () => {
     color: rgba(255, 255, 255, 0.85);
   }
 
-  /* 统一边框和���割线颜色 */
+  /* 统一边框和割线颜色 */
   :deep(.n-divider) {
     background-color: #303030 !important;
   }
@@ -982,5 +987,11 @@ watch(searchText, () => {
   .search-dropdown {
     background-color: #1f1f1f;
   }
+}
+
+:deep(.n-input) {
+  --n-border-hover: rgb(24, 144, 255) !important;
+  --n-border-focus: rgb(24, 144, 255) !important;
+  --n-box-shadow-focus: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
 }
 </style>
