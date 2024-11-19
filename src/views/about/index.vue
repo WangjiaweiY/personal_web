@@ -15,15 +15,59 @@
               <div class="avatar-ring"></div>
             </div>
             <div class="intro-text">
-              <h1 class="intro-name">王嘉炜 (Joeww Wang)</h1>
-              <p class="intro-title">西北大学软件工程专业 / 推免研究生</p>
+              <h1 class="intro-name">王嘉炜</h1>
+              <p class="intro-title">Joeww Wang</p>
               <n-space>
-                <n-tag type="success" round size="large">中共党员</n-tag>
-                <n-tag type="info" round size="large">班长</n-tag>
-                <n-tag type="warning" round size="large">辅导员助理</n-tag>
+                <n-tag type="info" round size="large" :bordered="false">软件工程</n-tag>
+                <n-tag type="info" round size="large" :bordered="false">推免研究生</n-tag>
+                <n-tag type="info" round size="large" :bordered="false">中共党员</n-tag>
               </n-space>
             </div>
           </n-space>
+        </n-card>
+      </n-grid-item>
+
+      <!-- 教育背景 -->
+      <n-grid-item :span="12">
+        <n-card title="教育背景" class="shadow-card">
+          <n-timeline>
+            <n-timeline-item
+              type="info"
+              title="西北大学"
+              content="软件工程专业 研究生"
+              time="2024 - 至今"
+            >
+              <template #icon>
+                <n-icon><BookOutlined /></n-icon>
+              </template>
+              <n-space vertical>
+                <n-text depth="3">研究方向：医学影像处理</n-text>
+                <n-text depth="3">导师：崔磊</n-text>
+                <n-space>
+                  <n-tag size="small" :bordered="false" type="info">推免研究生</n-tag>
+                </n-space>
+              </n-space>
+            </n-timeline-item>
+
+            <n-timeline-item
+              type="info"
+              title="西北大学"
+              content="软件工程专业 本科"
+              time="2020 - 2024"
+            >
+              <template #icon>
+                <n-icon><BookOutlined /></n-icon>
+              </template>
+              <n-space vertical>
+                <n-text depth="3">担任职务：</n-text>
+                <n-space>
+                  <n-tag size="small" :bordered="false" type="info">班长</n-tag>
+                  <n-tag size="small" :bordered="false" type="info">辅导员助理</n-tag>
+                  <n-tag size="small" :bordered="false" type="info">党支部纪检党小组组长</n-tag>
+                </n-space>
+              </n-space>
+            </n-timeline-item>
+          </n-timeline>
         </n-card>
       </n-grid-item>
 
@@ -75,50 +119,6 @@
                   <n-tag size="small" :bordered="false" type="info">腾讯云</n-tag>
                   <n-tag size="small" :bordered="false" type="success">iOS开发</n-tag>
                   <n-tag size="small" :bordered="false" type="warning">客户端开发</n-tag>
-                </n-space>
-              </n-space>
-            </n-timeline-item>
-          </n-timeline>
-        </n-card>
-      </n-grid-item>
-
-      <!-- 教育背景 -->
-      <n-grid-item :span="12">
-        <n-card title="教育背景" class="shadow-card">
-          <n-timeline>
-            <n-timeline-item
-              type="success"
-              title="西北大学"
-              content="软件工程专业 研究生"
-              time="2024 - 至今"
-            >
-              <template #icon>
-                <n-icon><BookOutlined /></n-icon>
-              </template>
-              <n-space vertical>
-                <n-text depth="3">研究方向：医学影像处理</n-text>
-                <n-text depth="3">导师：崔磊</n-text>
-                <n-space>
-                  <n-tag size="small" :bordered="false" type="success">推免研究生</n-tag>
-                </n-space>
-              </n-space>
-            </n-timeline-item>
-
-            <n-timeline-item
-              type="info"
-              title="西北大学"
-              content="软件工程专业 本科"
-              time="2020 - 2024"
-            >
-              <template #icon>
-                <n-icon><BookOutlined /></n-icon>
-              </template>
-              <n-space vertical>
-                <n-text depth="3">担任职务：</n-text>
-                <n-space>
-                  <n-tag size="small" :bordered="false" type="success">班长</n-tag>
-                  <n-tag size="small" :bordered="false" type="info">辅导员助理</n-tag>
-                  <n-tag size="small" :bordered="false" type="warning">党支部纪检党小组组长</n-tag>
                 </n-space>
               </n-space>
             </n-timeline-item>
@@ -259,8 +259,8 @@ const hobbies = [
 }
 
 .intro-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f5ff 100%);
+  color: #1890ff;
 }
 
 .intro-header {
@@ -274,7 +274,7 @@ const hobbies = [
 
 .intro-avatar {
   border: 4px solid white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(24, 144, 255, 0.2);
 }
 
 .avatar-ring {
@@ -283,7 +283,7 @@ const hobbies = [
   left: -10px;
   right: -10px;
   bottom: -10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(24, 144, 255, 0.3);
   border-radius: 50%;
   animation: ring-rotate 10s linear infinite;
 }
@@ -301,12 +301,64 @@ const hobbies = [
   font-size: 36px;
   margin: 0 0 8px 0;
   font-weight: bold;
+  color: #1890ff;
 }
 
 .intro-title {
-  font-size: 18px;
+  font-size: 24px;
   margin: 0 0 16px 0;
-  opacity: 0.8;
+  color: rgba(24, 144, 255, 0.85);
+}
+
+:deep(.n-tag) {
+  background-color: rgba(24, 144, 255, 0.1) !important;
+  color: #1890ff !important;
+}
+
+:deep(.n-timeline-item-content) {
+  margin-bottom: 24px;
+}
+
+:deep(.n-timeline-item-content__title) {
+  color: #1890ff;
+}
+
+:deep(.n-card-header) {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+/* 深色模式适配 */
+:deep([data-theme='dark']) {
+  .intro-card {
+    background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .intro-name {
+    color: #1890ff;
+  }
+
+  .intro-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .avatar-ring {
+    border-color: rgba(24, 144, 255, 0.3);
+  }
+
+  :deep(.n-tag) {
+    background-color: rgba(24, 144, 255, 0.15) !important;
+    color: #1890ff !important;
+  }
+
+  :deep(.n-timeline-item-content__title) {
+    color: #1890ff;
+  }
+
+  :deep(.n-card-header) {
+    color: #1890ff;
+  }
 }
 
 .hobby-item {

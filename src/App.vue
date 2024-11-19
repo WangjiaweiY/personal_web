@@ -1,17 +1,19 @@
 <template>
-  <n-message-provider>
-    <n-loading-bar-provider>
-      <n-dialog-provider>
-        <n-notification-provider>
-          <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-              <component :is="Component" />
-            </transition>
-          </router-view>
-        </n-notification-provider>
-      </n-dialog-provider>
-    </n-loading-bar-provider>
-  </n-message-provider>
+  <n-config-provider>
+    <n-message-provider>
+      <n-loading-bar-provider>
+        <n-dialog-provider>
+          <n-notification-provider>
+            <router-view v-slot="{ Component }">
+              <transition name="fade" mode="out-in">
+                <component :is="Component" />
+              </transition>
+            </router-view>
+          </n-notification-provider>
+        </n-dialog-provider>
+      </n-loading-bar-provider>
+    </n-message-provider>
+  </n-config-provider>
 </template>
 
 <script setup lang="ts">

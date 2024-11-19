@@ -5,13 +5,17 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    name: 'Welcome',
+    component: () => import('@/views/welcome/index.vue')
+  },
+  {
+    path: '/home',
     component: AppLayout,
     children: [
       {
         path: '',
         name: 'Home',
-        component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页' }
+        component: () => import('@/views/home/index.vue')
       },
       {
         path: 'about',
@@ -39,35 +43,22 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/contact/index.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: to => {
+      if (to.path === '/') {
+        return '/home'
+      }
+      const path = to.path.replace('/', '')
+      return `/home/${path}`
+    }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { top: 0 }
-    }
-  }
-})
-
-// 添加全局前置守卫
-router.beforeEach((to, from, next) => {
-  // 使用 window.$loadingBar 而不是 useLoadingBar
-  if (window.$loadingBar) {
-    window.$loadingBar.start()
-  }
-  next()
-})
-
-// 添加全局后置守卫
-router.afterEach(() => {
-  if (window.$loadingBar) {
-    window.$loadingBar.finish()
-  }
+  routes
 })
 
 export default router 

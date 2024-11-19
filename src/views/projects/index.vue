@@ -1,26 +1,18 @@
 <template>
   <div class="projects-container">
     <n-grid :cols="24" :x-gap="16" :y-gap="16">
-      <!-- 项目统计卡片 -->
-      <n-grid-item :span="24">
-        <div class="stats-container">
-          <n-card v-for="stat in statistics" :key="stat.label" class="stat-card">
-            <n-space align="center" :size="12">
-              <div class="stat-icon" :style="{ backgroundColor: stat.color + '20' }">
-                <n-icon :component="stat.icon" :color="stat.color" size="24" />
-              </div>
-              <div class="stat-content">
-                <div class="stat-value">{{ stat.value }}</div>
-                <div class="stat-label">{{ stat.label }}</div>
-              </div>
-            </n-space>
-          </n-card>
-        </div>
-      </n-grid-item>
-
       <!-- 精选项目 -->
       <n-grid-item :span="24">
-        <n-card title="精选项目" class="shadow-card">
+        <n-card class="shadow-card">
+          <template #header>
+            <div class="card-header">
+              <n-icon size="24" color="#1890ff">
+                <StarOutlined />
+              </n-icon>
+              <span class="header-title">精选项目</span>
+              <div class="header-line"></div>
+            </div>
+          </template>
           <n-carousel
             show-arrow
             dot-type="line"
@@ -60,7 +52,16 @@
 
       <!-- 项目列表 -->
       <n-grid-item :span="24">
-        <n-card title="所有项目" class="shadow-card">
+        <n-card class="shadow-card">
+          <template #header>
+            <div class="card-header">
+              <n-icon size="24" color="#1890ff">
+                <ProjectOutlined />
+              </n-icon>
+              <span class="header-title">所有项目</span>
+              <div class="header-line"></div>
+            </div>
+          </template>
           <n-tabs type="line" animated>
             <n-tab-pane
               v-for="category in projectCategories"
@@ -75,7 +76,7 @@
                       <n-avatar
                         :src="project.logo"
                         :color="project.color"
-                        :style="{ backgroundColor: project.color + '20' }"
+                        :style="{ backgroundColor: '#1890ff20' }"
                         :size="48"
                       >
                         <n-icon :component="project.icon" />
@@ -92,7 +93,7 @@
                         :key="tech"
                         size="small"
                         :bordered="false"
-                        :color="{ textColor: project.color, borderColor: project.color, color: project.color + '20' }"
+                        :color="{ textColor: '#1890ff', borderColor: '#1890ff', color: '#1890ff20' }"
                       >
                         {{ tech }}
                       </n-tag>
@@ -100,7 +101,7 @@
                     <template #footer>
                       <n-space justify="space-between">
                         <n-text depth="3">{{ project.date }}</n-text>
-                        <n-button text>
+                        <n-button text type="primary">
                           了解更多
                           <template #icon>
                             <n-icon><ArrowRightOutlined /></n-icon>
@@ -115,65 +116,22 @@
           </n-tabs>
         </n-card>
       </n-grid-item>
-
-      <!-- 项目时间线 -->
-      <n-grid-item :span="24">
-        <n-card title="项目历程" class="shadow-card">
-          <n-timeline>
-            <n-timeline-item
-              v-for="milestone in projectMilestones"
-              :key="milestone.date"
-              :type="milestone.type"
-              :title="milestone.title"
-              :content="milestone.content"
-              :time="milestone.date"
-            >
-              <template #icon>
-                <n-icon :component="milestone.icon" />
-              </template>
-              <n-space vertical>
-                <n-text depth="3">{{ milestone.description }}</n-text>
-                <n-space>
-                  <n-tag
-                    v-for="(achievement, index) in milestone.achievements"
-                    :key="index"
-                    size="small"
-                    :bordered="false"
-                    :type="milestone.type"
-                  >
-                    {{ achievement }}
-                  </n-tag>
-                </n-space>
-              </n-space>
-            </n-timeline-item>
-          </n-timeline>
-        </n-card>
-      </n-grid-item>
     </n-grid>
   </div>
 </template>
 
 <script setup lang="ts">
+import { h, ref } from 'vue'
 import {
   CodeOutlined,
   RocketOutlined,
-  TrophyOutlined,
-  TeamOutlined,
   CloudOutlined,
-  MobileOutlined,
-  DesktopOutlined,
-  DatabaseOutlined,
   ArrowRightOutlined,
-  FlagOutlined
+  StarOutlined,
+  ProjectOutlined
 } from '@vicons/antd'
 
-const statistics = [
-  { label: '完成项目', value: '30+', icon: RocketOutlined, color: '#42b883' },
-  { label: '客户好评', value: '98%', icon: TrophyOutlined, color: '#1890ff' },
-  { label: '团队规模', value: '20+', icon: TeamOutlined, color: '#722ed1' },
-  { label: '技术栈', value: '15+', icon: CodeOutlined, color: '#f5222d' }
-]
-
+// 精选项目数据
 const featuredProjects = [
   {
     title: '企业级管理系统',
@@ -189,6 +147,7 @@ const featuredProjects = [
   }
 ]
 
+// 项目分类数据
 const projectCategories = [
   {
     key: 'web',
@@ -198,8 +157,8 @@ const projectCategories = [
         title: '企业管理系统',
         description: '现代化的企业级应用',
         logo: '',
-        color: '#42b883',
-        icon: DesktopOutlined,
+        color: '#1890ff',
+        icon: CodeOutlined,
         status: 'active',
         statusText: '维护中',
         tagType: 'success',
@@ -211,7 +170,7 @@ const projectCategories = [
         description: '大数据可视化平台',
         logo: '',
         color: '#1890ff',
-        icon: DatabaseOutlined,
+        icon: CloudOutlined,
         status: 'completed',
         statusText: '已完成',
         tagType: 'info',
@@ -228,8 +187,8 @@ const projectCategories = [
         title: '电商小程序',
         description: '全功能电商平台',
         logo: '',
-        color: '#52c41a',
-        icon: MobileOutlined,
+        color: '#1890ff',
+        icon: RocketOutlined,
         status: 'active',
         statusText: '开发中',
         tagType: 'warning',
@@ -239,27 +198,6 @@ const projectCategories = [
     ]
   }
 ]
-
-const projectMilestones = [
-  {
-    date: '2023 Q4',
-    title: '企业管理系统上线',
-    content: '重要里程碑',
-    type: 'success',
-    icon: FlagOutlined,
-    description: '成功交付并部署企业级管理系统',
-    achievements: ['性能优化', '安全加固', '用户培训']
-  },
-  {
-    date: '2023 Q3',
-    title: '数据分析平台完成',
-    content: '重要进展',
-    type: 'info',
-    icon: RocketOutlined,
-    description: '完成数据分析平台的开发和测试',
-    achievements: ['可视化优化', '实时分析', '报表导出']
-  }
-]
 </script>
 
 <style scoped>
@@ -267,50 +205,10 @@ const projectMilestones = [
   padding: 16px;
 }
 
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.stat-card {
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stat-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-value {
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.stat-label {
-  font-size: 14px;
-  color: #666;
-}
-
 .shadow-card {
   transition: all 0.3s ease;
   border-radius: 8px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f5ff 100%);
 }
 
 .shadow-card:hover {
@@ -344,6 +242,7 @@ const projectMilestones = [
 .project-title {
   font-size: 28px;
   margin: 0 0 16px 0;
+  color: #1890ff;
 }
 
 .project-desc {
@@ -354,6 +253,7 @@ const projectMilestones = [
 
 .project-btn {
   margin-top: 16px;
+  background-color: #1890ff;
 }
 
 .project-card {
@@ -379,6 +279,7 @@ const projectMilestones = [
 .project-card-title {
   margin: 0 0 8px 0;
   font-size: 18px;
+  color: #1890ff;
 }
 
 .project-card-desc {
@@ -394,15 +295,62 @@ const projectMilestones = [
   margin-bottom: 16px;
 }
 
-.active {
-  border-top: 3px solid #52c41a;
+:deep(.n-card-header) {
+  color: #1890ff;
+  font-weight: bold;
 }
 
-.completed {
-  border-top: 3px solid #1890ff;
+/* 添加标题样式 */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  position: relative;
 }
 
-.development {
-  border-top: 3px solid #722ed1;
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-right: 16px;
+}
+
+.header-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #1890ff 0%, rgba(24, 144, 255, 0.2) 100%);
+  border-radius: 1px;
+}
+
+/* 深色模式适配 */
+:deep([data-theme='dark']) {
+  .shadow-card {
+    background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+  }
+
+  .project-title {
+    color: #1890ff;
+  }
+
+  .project-card-title {
+    color: #1890ff;
+  }
+
+  .project-card-desc {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :deep(.n-card-header) {
+    color: #1890ff;
+  }
+
+  .header-title {
+    color: #1890ff;
+  }
+
+  .header-line {
+    background: linear-gradient(90deg, #1890ff 0%, rgba(24, 144, 255, 0.1) 100%);
+  }
 }
 </style> 

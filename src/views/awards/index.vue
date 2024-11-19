@@ -3,24 +3,35 @@
     <n-grid :cols="24" :x-gap="16" :y-gap="16">
       <!-- 获奖统计卡片 -->
       <n-grid-item :span="24">
-        <div class="stats-container">
-          <n-card v-for="stat in statistics" :key="stat.label" class="stat-card">
-            <n-space align="center" :size="12">
-              <div class="stat-icon" :style="{ backgroundColor: stat.color + '20' }">
-                <n-icon :component="stat.icon" :color="stat.color" size="24" />
-              </div>
-              <div class="stat-content">
-                <div class="stat-value">{{ stat.value }}</div>
-                <div class="stat-label">{{ stat.label }}</div>
-              </div>
-            </n-space>
-          </n-card>
-        </div>
+        <n-card class="shadow-card intro-card">
+          <div class="stats-container">
+            <n-card v-for="stat in statistics" :key="stat.label" class="stat-card">
+              <n-space align="center" :size="12">
+                <div class="stat-icon" :style="{ backgroundColor: '#1890ff20' }">
+                  <n-icon :component="stat.icon" color="#1890ff" size="24" />
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value">{{ stat.value }}</div>
+                  <div class="stat-label">{{ stat.label }}</div>
+                </div>
+              </n-space>
+            </n-card>
+          </div>
+        </n-card>
       </n-grid-item>
 
       <!-- 主要获奖经历 -->
       <n-grid-item :span="24">
-        <n-card title="获奖经历" class="shadow-card">
+        <n-card class="shadow-card">
+          <template #header>
+            <div class="card-header">
+              <n-icon size="24" color="#1890ff">
+                <TrophyOutlined />
+              </n-icon>
+              <span class="header-title">获奖经历</span>
+              <div class="header-line"></div>
+            </div>
+          </template>
           <n-timeline>
             <n-timeline-item
               v-for="award in awards"
@@ -41,7 +52,7 @@
                     :key="index"
                     size="small"
                     :bordered="false"
-                    :type="award.type"
+                    :color="{ textColor: '#1890ff', borderColor: '#1890ff', color: '#1890ff20' }"
                   >
                     {{ tag }}
                   </n-tag>
@@ -49,23 +60,6 @@
               </n-space>
             </n-timeline-item>
           </n-timeline>
-        </n-card>
-      </n-grid-item>
-
-      <!-- 荣誉证书展示 -->
-      <n-grid-item :span="24">
-        <n-card title="荣誉证书" class="shadow-card">
-          <n-grid :cols="6" :x-gap="16" :y-gap="16">
-            <n-grid-item v-for="cert in certificates" :key="cert.name">
-              <n-card hoverable class="cert-card">
-                <template #cover>
-                  <img :src="cert.image" class="cert-image" />
-                </template>
-                <h3 class="cert-name">{{ cert.name }}</h3>
-                <p class="cert-date">{{ cert.date }}</p>
-              </n-card>
-            </n-grid-item>
-          </n-grid>
         </n-card>
       </n-grid-item>
     </n-grid>
@@ -201,16 +195,28 @@ const certificates = [
   padding: 16px;
 }
 
+.shadow-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.shadow-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.intro-card {
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f5ff 100%);
+}
+
 .stats-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-bottom: 8px;
 }
 
 .stat-card {
   transition: all 0.3s ease;
-  padding: 16px;
 }
 
 .stat-card:hover {
@@ -233,9 +239,10 @@ const certificates = [
 }
 
 .stat-value {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  line-height: 1.2;
+  color: #1890ff;
+  line-height: 1;
   margin-bottom: 4px;
 }
 
@@ -244,57 +251,77 @@ const certificates = [
   color: #666;
 }
 
-.shadow-card {
-  transition: all 0.3s ease;
-  border-radius: 8px;
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  position: relative;
 }
 
-.shadow-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.cert-card {
-  height: 100%;
-  transition: all 0.3s ease;
-}
-
-.cert-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.cert-image {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px 8px 0 0;
-}
-
-.cert-name {
-  margin: 12px 0 4px;
-  font-size: 16px;
+.header-title {
+  font-size: 20px;
   font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #1890ff;
+  margin-right: 16px;
 }
 
-.cert-date {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
+.header-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #1890ff 0%, rgba(24, 144, 255, 0.2) 100%);
+  border-radius: 1px;
 }
 
-:deep(.n-timeline) {
-  padding: 16px 24px;
+:deep(.n-timeline-item-content__title) {
+  color: #1890ff !important;
+  font-weight: bold;
 }
 
-:deep(.n-timeline-item) {
-  margin-bottom: 24px;
+:deep(.n-timeline-item-content__content) {
+  color: rgba(0, 0, 0, 0.65);
 }
 
-:deep(.n-timeline-item-content) {
-  margin-left: 24px;
+:deep(.n-timeline-item-content__time) {
+  color: #1890ff;
+}
+
+/* 深色模式适配 */
+:deep([data-theme='dark']) {
+  .intro-card {
+    background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+  }
+
+  .stat-value {
+    color: #1890ff;
+  }
+
+  .stat-label {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .header-title {
+    color: #1890ff;
+  }
+
+  .header-line {
+    background: linear-gradient(90deg, #1890ff 0%, rgba(24, 144, 255, 0.1) 100%);
+  }
+
+  :deep(.n-timeline-item-content__title) {
+    color: #1890ff !important;
+  }
+
+  :deep(.n-timeline-item-content__content) {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :deep(.n-timeline-item-content__time) {
+    color: #1890ff;
+  }
+
+  :deep(.n-timeline-item-content) {
+    color: rgba(255, 255, 255, 0.85);
+  }
 }
 </style> 
